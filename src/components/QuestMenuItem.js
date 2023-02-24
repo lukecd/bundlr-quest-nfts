@@ -16,8 +16,7 @@ const QuestMenuItem = ({ title, description, videoLink, tutorialLink, nftContrac
 	const { mutate: claimNft, isLoading, error } = useClaimNFT(contract);
 	//const tx = await contract.claimTo(address, tokenId, quantity);
 
-	const bigInt1 = new BigNumber("1");
-	console.log("BigInt bigInt1=", bigInt1.toString());
+	console.log("contract=", contract);
 
 	if (error) {
 		console.error("failed to claim nft", error);
@@ -48,7 +47,7 @@ const QuestMenuItem = ({ title, description, videoLink, tutorialLink, nftContrac
 						{address && (
 							<Web3Button
 								contractAddress={contractAddress}
-								action={() => claimNft({ to: address, quantity: new BigNumber(1) })}
+								action={() => claimNft({ to: address, quantity: 1, tokenId: 0 })}
 							>
 								Claim NFT
 							</Web3Button>
