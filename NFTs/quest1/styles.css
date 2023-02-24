@@ -1,0 +1,44 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+#canvas1 {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.controls {
+	position: absolute;
+	z-index: 100;
+}
+
+.logo {
+	display: none;
+	visibility: hidden;
+}
+
+.canvas-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 600px;
+	height: 600px;
+}
+
+#playButton {
+	background-color: #fef4ee;
+	padding: 0;
+	border: none;
+	background: none;
+	position: absolute;
+	left: 90%;
+	top: 90%;
+}
+#playButton:hover {
+	transform: scale(1.5) perspective(1px);
+	transition: transform 1s ease-in-out;
+	color: white;
+}

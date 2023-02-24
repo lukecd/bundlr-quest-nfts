@@ -1,0 +1,19 @@
+{
+"manifest": "arweave/paths",
+"version": "0.1.0",
+"paths": {
+"third-web-uploader.csv":{"id":"FMPaVZ8JiTfPSjP_LTs3ukDBz00vGhWo3A2YtFZt4Z4"},
+"styles.css":{"id":"Ex9IV-kHeaiwkWhFn4y57vEPNd3m6GwjkW7_RVab778"},
+"play_circle.png":{"id":"bZoZGIYS86DMjQgpQ5qOSGAhMTaQsyCclaK3bz0gZAA"},
+"script.js":{"id":"vznRYPmaAhg9g2pr4LDs6YLnASBhMEAFNpiPul2U0wg"},
+"pause_circle.png":{"id":"5VmpBphIIB_Af9Nc-hNcEKoAcywf2TRk-zvsMOYlqSk"},
+"heart.png":{"id":"H-FbbFVOrS79YtTj0AKu_bCGYvnkEUm528xfrCPGwz4"},
+"logo.png":{"id":"54ryuYEndgQtkv08thm2fk65_aOzid7TWHjBFgDZlAM"},
+".DS_Store":{"id":"ePX0gNAH2vzNdIj8WeQGIB20N8z56prYPTcohaHbt7o"},
+"BndlrQuest1Metadata.json":{"id":"_ZSwqU52tvoWqP7FXjOx2O2Fx1GrP-xun26eQ8-IPvc"},
+"quest1-cover.png":{"id":"6CBtftoQ5BTxIr3R_yJYpNtn2MRjUvgZeRk1ZzVEgl4"},
+"index.html":{"id":"wT4Hxy7SCSnkQgCrp_kak-lFUtkrMmjJR-xtmzYDwzk"},
+"nft-soundtrack.mp3":{"id":"n_SirYSwAb5QPB1P3eit80nvFDQG8Zctuhc7I4xIfjc"}
+},
+"index":{"path":"index.html"}
+}
