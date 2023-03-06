@@ -9,13 +9,6 @@ window.addEventListener("load", function () {
 	let currentMode = "blob";
 	let modes = ["random", "blob", "rain", "logo", "swirl"];
 
-	// load custom font
-	var fkFont = new FontFace("FKDisplay", "url(./FKDisplay-RegularAlt.ttf)");
-	fkFont.load().then(function (font) {
-		document.fonts.add(font);
-		console.log("Font loaded");
-	});
-
 	const playButton = document.getElementById("playButton");
 
 	function checkMobile() {
@@ -346,7 +339,7 @@ window.addEventListener("load", function () {
 				i++;
 				const cluster = randomClusteredPoint(
 					Math.floor(canvas.width / 2), // centerX
-					Math.floor(canvas.height / 2) - canvas.height * 0.09, // centerY
+					Math.floor(canvas.height / 2), // centerY
 					blobRadius, // inner blob radius
 					0.09,
 				);
@@ -357,7 +350,7 @@ window.addEventListener("load", function () {
 				let size = Math.floor(
 					Math.sqrt(
 						Math.pow(canvas.width / 2 - clusterX, 2) +
-							Math.pow(canvas.height / 2 - canvas.height * 0.09 - clusterY, 2),
+							Math.pow(canvas.height / 2 - clusterY, 2),
 					),
 				);
 
@@ -450,31 +443,11 @@ window.addEventListener("load", function () {
 		}
 		console.log("song.currentTim=", song.currentTime);
 
-		ctx.globalAlpha = 1.0;
 		ctx.fillStyle = "#FEF4EE";
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
 		effect.update();
 		effect.draw();
 		ctx.fillStyle = "#000000";
-
-		let fontAlpha = 1 - song.currentTime / 10;
-		if (song.currentTime >= 9) fontAlpha = 0.0;
-		if (song.currentTime >= 243) {
-			fontAlpha = (20 - (263 - song.currentTime)) / 10;
-		}
-		ctx.globalAlpha = fontAlpha;
-		ctx.textAlign = "center";
-		if (isMobile) {
-			ctx.font = "40px FKDisplay";
-			ctx.fillText("Bundlr Quests", canvas.width / 2, canvas.height * 0.7);
-			ctx.font = "20px FKDisplay";
-			ctx.fillText("Quest 1: SDK Quest", canvas.width / 2, canvas.height * 0.7 + 35);
-		} else {
-			ctx.font = "50px FKDisplay";
-			ctx.fillText("Bundlr Quests", canvas.width / 2, canvas.height * 0.9);
-			ctx.font = "30px FKDisplay";
-			ctx.fillText("Quest 1: SDK Quest", canvas.width / 2, canvas.height * 0.9 + 35);
-		}
 
 		requestAnimationFrame(animate);
 	}

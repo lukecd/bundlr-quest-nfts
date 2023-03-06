@@ -34,7 +34,7 @@
 	background: none;
 	position: absolute;
 	left: 80%;
-	top: 90%;
+	top: 80%;
 }
 #playButton:hover {
 	transform: scale(1.5) perspective(1px);

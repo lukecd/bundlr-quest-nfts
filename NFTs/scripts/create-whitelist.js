@@ -1,7 +1,7 @@
 import { ThirdwebSDK } from "@thirdweb-dev/sdk/evm";
 import fs from "fs";
 import csv from "csv-parser";
-
+import Papa from "papaparse";
 import { promisify } from "util";
 import { ethers } from "ethers";
 import dotenv from "dotenv";
@@ -11,7 +11,7 @@ dotenv.config();
 const blockChain = "mumbai";
 
 // data file
-const walletFiles = ["./wallets1.csv", "./wallets3.csv"];
+const walletFiles = ["./wallets1.csv", "./wallets3.csv", "./wallets3-staff.csv"];
 const readFile = promisify(fs.readFile);
 
 // get a provider
@@ -22,7 +22,7 @@ const signer = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
 
 // get an instance of the SDK with the signer already setup
 const sdk = ThirdwebSDK.fromSigner(signer, blockChain);
-const contract = await sdk.getContract("0xa983A8BA20aF0E2717Aab51b37a091F80bC317e1");
+const contract = await sdk.getContract("0x6a954b537ebD8477320246D47B9d6eEe51B49f0b");
 
 const tokenId = 3;
 
@@ -80,6 +80,13 @@ const createWhitelist = async (wallets) => {
 	await contract.erc1155.claimConditions.set(tokenId, claimConditions);
 };
 
-const wallets = await loadWallets();
-console.log(`wallet length is ${wallets.length}`);
-await createWhitelist(wallets);
+let wallets = await loadWallets();
+wallets = [...new Set(wallets)];
+let outputFile = [];
+for (let i = 0; i < wallets.length; i++) {
+	outputFile.push({ address: wallets[i], maxClaimable: 1 });
+}
+fs.writeFileSync("final-whitelist.csv", Buffer.from(Papa.unparse(outputFile)), "utf-8");
+
+// console.log(`wallet length is ${wallets.length}`);
+// await createWhitelist(wallets);
