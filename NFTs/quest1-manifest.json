@@ -2,18 +2,19 @@
 "manifest": "arweave/paths",
 "version": "0.1.0",
 "paths": {
-"third-web-uploader.csv":{"id":"FMPaVZ8JiTfPSjP_LTs3ukDBz00vGhWo3A2YtFZt4Z4"},
-"styles.css":{"id":"Ex9IV-kHeaiwkWhFn4y57vEPNd3m6GwjkW7_RVab778"},
-"play_circle.png":{"id":"bZoZGIYS86DMjQgpQ5qOSGAhMTaQsyCclaK3bz0gZAA"},
-"script.js":{"id":"vznRYPmaAhg9g2pr4LDs6YLnASBhMEAFNpiPul2U0wg"},
-"pause_circle.png":{"id":"5VmpBphIIB_Af9Nc-hNcEKoAcywf2TRk-zvsMOYlqSk"},
-"heart.png":{"id":"H-FbbFVOrS79YtTj0AKu_bCGYvnkEUm528xfrCPGwz4"},
-"logo.png":{"id":"54ryuYEndgQtkv08thm2fk65_aOzid7TWHjBFgDZlAM"},
-".DS_Store":{"id":"ePX0gNAH2vzNdIj8WeQGIB20N8z56prYPTcohaHbt7o"},
-"BndlrQuest1Metadata.json":{"id":"_ZSwqU52tvoWqP7FXjOx2O2Fx1GrP-xun26eQ8-IPvc"},
-"quest1-cover.png":{"id":"6CBtftoQ5BTxIr3R_yJYpNtn2MRjUvgZeRk1ZzVEgl4"},
-"index.html":{"id":"wT4Hxy7SCSnkQgCrp_kak-lFUtkrMmjJR-xtmzYDwzk"},
-"nft-soundtrack.mp3":{"id":"n_SirYSwAb5QPB1P3eit80nvFDQG8Zctuhc7I4xIfjc"}
+"styles.css":{"id":"F9wwDO50yPI5uHOw7dMLqUYJhUaAF2neHAiE3T_AD2M"},
+"play_circle.png":{"id":"MlRQaA9SWgqCz8IMde6Mp1mHs2wo-DGl9eYBug1nX18"},
+"pause_circle.png":{"id":"IkDxdNvxJs4PWYGZ9EtQv1EKM6rilTsXKMfDfLr6wLA"},
+"script.js":{"id":"cjgR1jbe8BDsYVEjFZzsCjsE3zgiMIJJRbr5BCe3hTY"},
+"heart.png":{"id":"UUiKVqATbvYvwvJJkXY6A4ZRIVrY355ntRpLiHD_XQg"},
+".DS_Store":{"id":"F92U9FxZM5VJxU-Tg0dO9a5RyWbw0p-UqM08VCJj35k"},
+"index_aAudioTag.html":{"id":"oBWliBpz_jh6tTqnBHJ08NycBeBqdaZThZoPqKCvU1g"},
+"BndlrQuest1Metadata.json":{"id":"vgX_llA9Kqu62o4SOyIzeI8-TapNMih-2KwF-tz5YUY"},
+"logo.png":{"id":"WBu2VTaWXe_55p-NHyoXViPJ11YThzd3lqXclBkAyns"},
+"FKDisplay-RegularAlt.ttf":{"id":"v1jDMoNjfpC8RQTE5JvgYQhrKZBwu1i-8UJMDWxeXas"},
+"index.html":{"id":"U2a7XOe4gqn8YPf1QxgrCpXbCDXlbJJUaUlwohTDQlQ"},
+"quest1-cover.png":{"id":"V6UwYVC4j5IZxl80KO3PJD-FnjqH6B5L7FcuHDKbICU"},
+"nft-soundtrack.mp3":{"id":"gb3ID5EO0wvzdw-k6xWqnTaUmIAQP9bLBgqgnXoezkQ"}
 },
 "index":{"path":"index.html"}
 }

@@ -7,7 +7,6 @@ import {
 	Web3Button,
 	useContractWrite,
 } from "@thirdweb-dev/react";
-import BigNumber from "bignumber.js";
 
 const QuestMenuItem = ({ title, description, videoLink, tutorialLink, nftContract, live }) => {
 	const address = useAddress();
@@ -55,11 +54,6 @@ const QuestMenuItem = ({ title, description, videoLink, tutorialLink, nftContrac
 					</>
 				)}
 			</div>
-			{!live && (
-				<div id="quest-menu-item-overlay">
-					<h1>Coming Soon ...</h1>
-				</div>
-			)}
 		</div>
 	);
 };

@@ -9,14 +9,60 @@ window.addEventListener("load", function () {
 	let currentMode = "blob";
 	let modes = ["random", "blob", "rain", "logo", "swirl"];
 
+	// load custom font
+	var fkFont = new FontFace("FKDisplay", "url(./FKDisplay-RegularAlt.ttf)");
+	fkFont.load().then(function (font) {
+		document.fonts.add(font);
+		console.log("Font loaded");
+	});
+
 	const playButton = document.getElementById("playButton");
 
+	function checkMobile() {
+		let check = false;
+		(function (a) {
+			if (
+				/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(
+					a,
+				) ||
+				/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(
+					a.substr(0, 4),
+				)
+			)
+				check = true;
+		})(navigator.userAgent || navigator.vendor || window.opera);
+		return check;
+	}
+	const isMobile = checkMobile();
+	if (isMobile) {
+		document.getElementById("playPauseImage").style.display = "none";
+	}
 	// song is 75 bpm
 	// Length of 1 beat: 0.8 second = 800 msec
-	// Length of 1 bar (4 beats): 3.2 second
-	// const song = new Audio();
-	// song.src = "./nft-soundtrack.mp3";
+	// Length of 1 bar (4 beats): 3.2 seconds
 	const song = document.getElementById("nft-soundtrack");
+	console.log("song loaded song=", song);
+	song.addEventListener("playing", function () {
+		console.log("playing event handler called");
+
+		shouldAnimate = true;
+		document.getElementById("playPauseImage").src = "./pause_circle.png";
+	});
+
+	song.addEventListener("ended", function () {
+		console.log("ended event handler called");
+
+		// TODO return to blob
+		shouldAnimate = false;
+		currentMode = "blob";
+		document.getElementById("playPauseImage").src = "./play_circle.png";
+	});
+
+	song.addEventListener("pause", function () {
+		console.log("pause event handler called");
+		currentMode = "logo";
+		document.getElementById("playPauseImage").src = "./play_circle.png";
+	});
 
 	let audioContext;
 	let audioSource;
@@ -34,6 +80,7 @@ window.addEventListener("load", function () {
 		if (song.duration > 0 && !song.paused) {
 			song.pause();
 			currentMode = "logo";
+			document.getElementById("playPauseImage").src = "./play_circle.png";
 		} else {
 			song.play();
 			audioContext = new AudioContext();
@@ -44,30 +91,27 @@ window.addEventListener("load", function () {
 			analyser.fftSize = 64; // default is 2048
 			const bufferLength = analyser.frequencyBinCount;
 			audioDataArray = new Uint8Array(bufferLength);
-		}
-
-		song.addEventListener("playing", function () {
-			console.log("playing event handler called");
-
-			shouldAnimate = true;
 			document.getElementById("playPauseImage").src = "./pause_circle.png";
-		});
+		}
+	});
 
-		song.addEventListener("ended", function () {
-			console.log("ended event handler called");
-
-			// TODO return to blob
-			shouldAnimate = false;
-			currentMode = "blob";
-			document.getElementById("playPauseImage").src = "./play_circle.png";
-		});
-
-		song.addEventListener("pause", function () {
-			//shouldAnimate = false;
-			console.log("pause event handler called");
+	playButton.addEventListener("touchend", function () {
+		if (song.duration > 0 && !song.paused) {
+			song.pause();
 			currentMode = "logo";
 			document.getElementById("playPauseImage").src = "./play_circle.png";
-		});
+		} else {
+			song.play();
+			audioContext = new AudioContext();
+			audioSource = audioContext.createMediaElementSource(song);
+			analyser = audioContext.createAnalyser();
+			audioSource.connect(analyser);
+			analyser.connect(audioContext.destination);
+			analyser.fftSize = 64; // default is 2048
+			const bufferLength = analyser.frequencyBinCount;
+			audioDataArray = new Uint8Array(bufferLength);
+			document.getElementById("playPauseImage").src = "./pause_circle.png";
+		}
 	});
 
 	class Particle {
@@ -143,10 +187,6 @@ window.addEventListener("load", function () {
 		}
 
 		update() {
-			// always track our distance from center
-			this.XdistanceFromCenter = canvas.width - this.x;
-			this.YdistanceFromCenter = canvas.height - this.y;
-
 			// check mouse
 			this.dx = this.effect.mouse.x - this.x;
 			this.dy = this.effect.mouse.y - this.y;
@@ -184,7 +224,7 @@ window.addEventListener("load", function () {
 			}
 
 			if (shouldDance) {
-				if (bumpX != -1) {
+				if (bumpX !== -1) {
 					this.dx = bumpX - this.x;
 					this.dy = bumpY - this.y;
 					// this should be wrapped in Math.sqrt() but that's performance intensive
@@ -245,7 +285,14 @@ window.addEventListener("load", function () {
 				y: undefined,
 			};
 
+			// desktop
 			window.addEventListener("mousemove", (event) => {
+				this.mouse.x = event.x;
+				this.mouse.y = event.y;
+			});
+
+			// mobile
+			window.addEventListener("touchmove", (event) => {
 				this.mouse.x = event.x;
 				this.mouse.y = event.y;
 			});
@@ -293,14 +340,13 @@ window.addEventListener("load", function () {
 				blobRadius = Math.floor(canvas.height * 0.8);
 			}
 			blobRadius /= 2;
-			console.log("blobRadius=", blobRadius);
 			let loopMax = maxParticles * 500; // protect against infinite loops
 			let i = 0;
 			while (numParticles < maxParticles && i < loopMax) {
 				i++;
 				const cluster = randomClusteredPoint(
 					Math.floor(canvas.width / 2), // centerX
-					Math.floor(canvas.height / 2), // centerY
+					Math.floor(canvas.height / 2) - canvas.height * 0.09, // centerY
 					blobRadius, // inner blob radius
 					0.09,
 				);
@@ -311,7 +357,7 @@ window.addEventListener("load", function () {
 				let size = Math.floor(
 					Math.sqrt(
 						Math.pow(canvas.width / 2 - clusterX, 2) +
-							Math.pow(canvas.height / 2 - clusterY, 2),
+							Math.pow(canvas.height / 2 - canvas.height * 0.09 - clusterY, 2),
 					),
 				);
 
@@ -346,12 +392,12 @@ window.addEventListener("load", function () {
 		}
 	}
 
-	const effect = new Effect(canvas.width, canvas.height, ctx);
+	let effect = new Effect(canvas.width, canvas.height, ctx);
 	effect.init();
-	// mouse click
-	// addEventListener("click", (event) => {});
-	// mobile touch
-	// addEventListener("touchstart", (event) => {});
+	window.addEventListener("resize", () => {
+		effect = new Effect(canvas.width, canvas.height, ctx);
+		effect.init();
+	});
 
 	let lastBump = 0;
 	function doBump(curTime) {
@@ -365,8 +411,6 @@ window.addEventListener("load", function () {
 
 	function animate() {
 		if (analyser) {
-			// console.log("song.currentTime=", song.currentTime);
-
 			analyser.getByteFrequencyData(audioDataArray);
 			const maxAmplitude = Math.max(...audioDataArray);
 			speedModifier = scale(maxAmplitude, 0, 256, 1, 10);
@@ -404,10 +448,34 @@ window.addEventListener("load", function () {
 			if (currentTime > 43 && currentTime < 204) shouldDance = true;
 			else shouldDance = false;
 		}
+		console.log("song.currentTim=", song.currentTime);
+
+		ctx.globalAlpha = 1.0;
 		ctx.fillStyle = "#FEF4EE";
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
 		effect.update();
 		effect.draw();
+		ctx.fillStyle = "#000000";
+
+		let fontAlpha = 1 - song.currentTime / 10;
+		if (song.currentTime >= 9) fontAlpha = 0.0;
+		if (song.currentTime >= 243) {
+			fontAlpha = (20 - (263 - song.currentTime)) / 10;
+		}
+		ctx.globalAlpha = fontAlpha;
+		ctx.textAlign = "center";
+		if (isMobile) {
+			ctx.font = "40px FKDisplay";
+			ctx.fillText("Bundlr Quests", canvas.width / 2, canvas.height * 0.7);
+			ctx.font = "20px FKDisplay";
+			ctx.fillText("Quest 1: SDK Quest", canvas.width / 2, canvas.height * 0.7 + 35);
+		} else {
+			ctx.font = "50px FKDisplay";
+			ctx.fillText("Bundlr Quests", canvas.width / 2, canvas.height * 0.9);
+			ctx.font = "30px FKDisplay";
+			ctx.fillText("Quest 1: SDK Quest", canvas.width / 2, canvas.height * 0.9 + 35);
+		}
+
 		requestAnimationFrame(animate);
 	}
 	animate();

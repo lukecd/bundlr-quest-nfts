@@ -1,8 +1,8 @@
-import logo from "./logo.svg";
 import "./index.css";
 import QuestsHero from "./components/QuestsHero";
 import QuestsMenu from "./components/QuestsMenu";
 import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
+import QuestBottomImage from "./components/QuestBottomImage";
 
 function App() {
 	return (
@@ -11,6 +11,7 @@ function App() {
 				<QuestsHero />
 				<QuestsMenu />
 			</div>
+			<QuestBottomImage />
 		</ThirdwebProvider>
 	);
 }
